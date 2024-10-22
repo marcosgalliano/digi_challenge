@@ -1,6 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface IPlanet extends Document {
+  apiId: number;
   name: string;
   rotation_period: string;
   orbital_period: string;
@@ -15,6 +16,7 @@ export interface IPlanet extends Document {
 }
 
 const planetSchema = new Schema<IPlanet>({
+  apiId: { type: Number, required: true }, 
   name: { type: String, required: true },
   rotation_period: { type: String, required: true },
   orbital_period: { type: String, required: true },

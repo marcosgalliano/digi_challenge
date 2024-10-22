@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { fetchPlanets } from "../controllers/planetsController";
-import PlanetModel from "../models/PlanetModel";
+import PlanetModel, { IPlanet } from "../models/PlanetModel";
 import { PlanetQuery } from "../types";
 
 export const getPlanetsHandler = async (
@@ -38,18 +38,24 @@ export const savePlanetsHandler = async (
   try {
     const planets = await fetchPlanets();
 
-    const createdPlanets: any[] = [];
-    const repeatedPlanets: any[] = [];
+    const createdPlanets: IPlanet[] = [];
+    const repeatedPlanets: IPlanet[] = [];
 
     for (const planetData of planets) {
+      const urlParts = planetData.url.split("/");
+      const apiId = parseInt(urlParts[urlParts.length - 2], 10);
+
       const existingPlanet = await PlanetModel.findOne({
-        name: planetData.name,
+        apiId,
       });
 
       if (existingPlanet) {
         repeatedPlanets.push(existingPlanet.toObject());
       } else {
-        const planet = new PlanetModel(planetData);
+        const planet = new PlanetModel({
+          ...planetData,
+          apiId,
+        });
         const savedPlanet = await planet.save();
         createdPlanets.push(savedPlanet.toObject());
       }

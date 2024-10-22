@@ -15,6 +15,7 @@ export interface IFilm extends Document {
   created: Date;
   edited: Date;
   url: string;
+  apiId: number; 
 }
 
 const filmSchema = new Schema<IFilm>({
@@ -32,6 +33,7 @@ const filmSchema = new Schema<IFilm>({
   created: { type: Date, required: true },
   edited: { type: Date, required: true },
   url: { type: String, required: true },
+  apiId: { type: Number, required: true },
 });
 
 const FilmModel = model<IFilm>("Film", filmSchema);

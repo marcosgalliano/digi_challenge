@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { fetchStarships } from "../controllers/starshipsController";
-import StarshipModel from "../models/StarshipModel";
+import StarshipModel, { IStarship } from "../models/StarshipModel";
 import { StarshipQuery } from "../types";
 
 export const saveStarshipsHandler = async (
@@ -10,34 +10,39 @@ export const saveStarshipsHandler = async (
   try {
     const starships = await fetchStarships();
 
-    const starshipsToSave = starships.map((starshipData) => ({
-      ...starshipData,
-      starshipModel: starshipData.model,
-      model: undefined,
-    }));
+    const starshipsToSave = starships.map((starshipData) => {
+      const urlParts = starshipData.url.split("/");
+      const apiId = parseInt(urlParts[urlParts.length - 2], 10);
 
-    const createdProducts: any[] = [];
-    const repeatedProducts: any[] = [];
+      return {
+        ...starshipData,
+        starshipModel: starshipData.model,
+        model: undefined,
+        apiId: apiId,
+      };
+    });
+
+    const createdStarships: IStarship[] = [];
+    const repeatedStarships: IStarship[] = [];
 
     for (const starshipData of starshipsToSave) {
       const existingStarship = await StarshipModel.findOne({
-        name: starshipData.name,
-        starshipModel: starshipData.starshipModel,
+        apiId: starshipData.apiId,
       });
 
       if (existingStarship) {
-        repeatedProducts.push(existingStarship.toObject());
+        repeatedStarships.push(existingStarship.toObject());
       } else {
         const starship = new StarshipModel(starshipData);
         const savedStarship = await starship.save();
-        createdProducts.push(savedStarship.toObject());
+        createdStarships.push(savedStarship.toObject());
       }
     }
 
     res.status(200).json({
       message: "Proceso de guardado completado.",
-      createdProducts,
-      repeatedProducts,
+      createdStarships,
+      repeatedStarships,
     });
   } catch (error) {
     console.error("Error al guardar las naves estelares:", error);
@@ -73,10 +78,8 @@ export const getStarshipsHandler = async (
     res.status(200).json({ data: starshipsWithModel });
   } catch (error) {
     console.error("Error fetching starships from database:", error);
-    res
-      .status(500)
-      .json({
-        error: "Error al obtener las naves estelares desde la base de datos.",
-      });
+    res.status(500).json({
+      error: "Error al obtener las naves estelares desde la base de datos.",
+    });
   }
 };

@@ -1,5 +1,6 @@
 import express from "express";
 import routes from "./routes/index";
+import morgan from 'morgan';
 import connectDB from "./db";
 import { saveDataCronJob } from "./cronJobs";
 import cors from "cors";
@@ -8,8 +9,9 @@ const app = express();
 connectDB();
 saveDataCronJob();
 
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3000" })); 
 
+app.use(morgan('dev'));
 app.use(express.json());
 app.use("/api", routes);
 

@@ -1,6 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface IStarship extends Document {
+  apiId: number;
   name: string;
   starshipModel: string;
   manufacturer: string;
@@ -19,6 +20,7 @@ export interface IStarship extends Document {
 }
 
 const starshipSchema = new Schema<IStarship>({
+  apiId: { type: Number, required: true },
   name: { type: String, required: true },
   starshipModel: { type: String, required: true },
   manufacturer: { type: String, required: true },

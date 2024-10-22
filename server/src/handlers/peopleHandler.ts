@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { fetchPeople } from "../controllers/peopleController";
-import PersonModel from "../models/PersonModel";
+import PersonModel, { IPerson } from "../models/PersonModel";
 import { PeopleQuery } from "../types";
 
 export const getPeopleHandler = async (
@@ -42,18 +42,24 @@ export const savePeopleHandler = async (
   try {
     const people = await fetchPeople();
 
-    const createdPeople: any[] = [];
-    const repeatedPeople: any[] = [];
+    const createdPeople: IPerson[] = [];
+    const repeatedPeople: IPerson[] = [];
 
     for (const personData of people) {
+      const urlParts = personData.url.split("/");
+      const apiId = parseInt(urlParts[urlParts.length - 2], 10);
+
       const existingPerson = await PersonModel.findOne({
-        name: personData.name,
+        apiId,
       });
 
       if (existingPerson) {
         repeatedPeople.push(existingPerson.toObject());
       } else {
-        const person = new PersonModel(personData);
+        const person = new PersonModel({
+          ...personData,
+          apiId,
+        });
         const savedPerson = await person.save();
         createdPeople.push(savedPerson.toObject());
       }

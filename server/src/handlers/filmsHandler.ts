@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { fetchFilms } from "../controllers/filmsController";
-import FilmModel from "../models/FilmModel";
+import FilmModel, { IFilm } from "../models/FilmModel";
 import { FilmQuery } from "../types";
 
 export const getFilmsHandler = async (
@@ -38,18 +38,24 @@ export const saveFilmsHandler = async (
   try {
     const films = await fetchFilms();
 
-    const createdFilms: any[] = [];
-    const repeatedFilms: any[] = [];
+    const createdFilms: IFilm[] = [];
+    const repeatedFilms: IFilm[] = [];
 
     for (const filmData of films) {
+      const urlParts = filmData.url.split("/");
+      const apiId = parseInt(urlParts[urlParts.length - 2], 10);
+
       const existingFilm = await FilmModel.findOne({
-        title: filmData.title,
+        apiId: apiId,
       });
 
       if (existingFilm) {
         repeatedFilms.push(existingFilm.toObject());
       } else {
-        const film = new FilmModel(filmData);
+        const film = new FilmModel({
+          ...filmData,
+          apiId: apiId,
+        });
         const savedFilm = await film.save();
         createdFilms.push(savedFilm.toObject());
       }

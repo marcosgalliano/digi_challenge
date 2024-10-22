@@ -9,7 +9,7 @@ export interface Person {
   gender: string;
   homeworld: string;
   films: string[];
-  species: any[];
+  species: string[];
   vehicles: string[];
   starships: string[];
   created: Date;
@@ -94,4 +94,27 @@ export interface StarshipQuery {
 export interface FilmQuery {
   title?: { $regex: RegExp };
   director?: { $regex: RegExp };
+}
+
+// RESPONSES
+
+export interface PeopleApiResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Person[];
+}
+
+export interface PlanetsApiResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Planets[];
+}
+
+export interface StarshipsApiResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Starships[];
 }
