@@ -1,0 +1,46 @@
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    background-color: #05144c;
+    width: 100%;
+    max-width: 240px;
+    margin: 20px;
+}
+
+
+.card:hover {
+    transform: scale(1.05);
+    background-color: #04144c;
+}
+
+.cardImage {
+    aspect-ratio: 2/2;
+    width: 100%;
+}
+
+.cardContent {
+    padding: 15px;
+}
+
+.cardContent h2 {
+    margin: 0;
+    font-size: 18px;
+    color: white;
+}
+
+.cardContent p {
+    margin: 10px 0;
+    color: #a7a7a7;
+}
+
+.cardLink {
+    color: #9C4577;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cardLink:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,181 @@
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.films {
+    padding-top: 150px;
+    padding-bottom: 50px;
+    background: linear-gradient(135deg, #0b0e20, #12256a, #553a6d);
+    background-size: 200% 200%;
+    animation: moveBackground 20s ease-in-out infinite;
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+.films h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #d35b8c;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.pagination button {
+    background-color: #071139;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #d35b8c;
+}
+
+.pagination button:disabled {
+    background-color: #826977;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 1.2rem;
+    color: white;
+}
+
+.desktopOnly {
+    display: inline-block;
+}
+
+.searchContainer {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.searchContainer p {
+    color: rgba(255, 255, 255, 0.373);
+    font-size: 14px;
+    position: absolute;
+    right: 33%;
+    top: 27%;
+    z-index: 99;
+}
+
+.searchInput {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+
+.filterContainer {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.operatorSelect,
+.releaseDateInput,
+.filterButton {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+}
+
+.filterButton {
+    background-color: #071139;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.filterButton:hover {
+    background-color: #d35b8c;
+}
+
+.clearButton {
+    background-color: #ff6347;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.clearButton:hover {
+    background-color: #e5533d;
+}
+
+.clearButton:disabled {
+    background-color: #b8b8b8;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .desktopOnly {
+        display: none;
+    }
+
+    .filterContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .operatorSelect,
+    .releaseDateInput,
+    .filterButton,
+    .clearButton {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .searchContainer p {
+        font-size: 12px;
+        right: 15%;
+    }
+
+    .searchInput {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .cardsContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}

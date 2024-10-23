@@ -1,0 +1,70 @@
+.App {
+    text-align: center;
+}
+
+.AppLogo {
+    height: 110px;
+    transform: rotate(45deg);
+}
+
+.AppHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg,
+            #0B0E20,
+            #12256A);
+    color: white;
+}
+
+.ContentWrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.ImageContainer {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.DecorativeImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50px;
+}
+
+.TextContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.Title {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.Description {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.ExploreButton {
+    background-color: #12256a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.ExploreButton:hover {
+    background-color: #ff7700;
+}
