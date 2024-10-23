@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const MONGO_URI = "mongodb://localhost:27017/digiProject";
-/* const MONGO_DEPLOY =
-  "mongodb+srv://marcosgalliano03:AC1TsGVa59w3SO4I@cluster0.waxns.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"; */
+/* const MONGO_URI = "mongodb://localhost:27017/digiProject"; */
+const MONGO_URI =
+  "mongodb+srv://marcosgalliano03:AC1TsGVa59w3SO4I@cluster0.waxns.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 const connectDB = async () => {
   try {
