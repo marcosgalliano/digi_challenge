@@ -1,6 +1,6 @@
 export interface Person {
   name: string;
-  height: string;
+  height: number;
   mass: string;
   hair_color: string;
   skin_color: string;
@@ -38,7 +38,7 @@ export interface Starships {
   name: string;
   model: string;
   manufacturer: string;
-  cost_in_credits: string;
+  cost_in_credits: number;
   length: string;
   max_atmosphering_speed: string;
   crew: string;
@@ -64,7 +64,7 @@ export interface Planets {
   gravity: string;
   terrain: string;
   surface_water: string;
-  population: string;
+  population: number;
   residents: string[];
   films: string[];
   created: Date;
@@ -72,28 +72,47 @@ export interface Planets {
   url: string;
 }
 
-
 // QUERYS
 
 export interface PlanetQuery {
   name?: { $regex: RegExp };
-  climate?: { $regex: RegExp };
+  population?:
+    | number
+    | { $lt?: number; $lte?: number; $gt?: number; $gte?: number };
 }
 
 export interface PeopleQuery {
   name?: { $regex: RegExp };
-  height?: string;
+  height?:
+    | string
+    | {
+        $lt?: number;
+        $lte?: number;
+        $gt?: number;
+        $gte?: number;
+        $eq?: number;
+      };
   mass?: string;
 }
 
 export interface StarshipQuery {
   name?: { $regex: RegExp };
-  starshipModel?: { $regex: RegExp };
+  cost_in_credits?: {
+    $lt?: number;
+    $gt?: number;
+    $lte?: number;
+    $gte?: number;
+  };
 }
 
 export interface FilmQuery {
   title?: { $regex: RegExp };
-  director?: { $regex: RegExp };
+  release_date?: {
+    $lt?: Date;
+    $lte?: Date;
+    $gt?: Date;
+    $gte?: Date;
+  };
 }
 
 // RESPONSES

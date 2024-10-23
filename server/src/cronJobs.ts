@@ -10,7 +10,7 @@ export const saveDataCronJob = async () => {
   cron.schedule("0 0 * * *", async () => {
     try {
       const peopleResponse = await axios.post(
-        "http://localhost:3001/api/people/save"
+        "https://digi-challenge.onrender.com/api/people/save"
       );
       const { createdPeople, repeatedPeople } = peopleResponse.data;
       console.log(
@@ -20,7 +20,7 @@ export const saveDataCronJob = async () => {
       );
 
       const starshipsResponse = await axios.post(
-        "http://localhost:3001/api/starships/save"
+        "https://digi-challenge.onrender.com/api/starships/save"
       );
       const { createdProducts, repeatedProducts } = starshipsResponse.data;
       console.log(
@@ -30,7 +30,7 @@ export const saveDataCronJob = async () => {
       );
 
       const planetsResponse = await axios.post(
-        "http://localhost:3001/api/planets/save"
+        "https://digi-challenge.onrender.com/api/planets/save"
       );
       const { createdPlanets, repeatedPlanets } = planetsResponse.data;
       console.log(
@@ -40,7 +40,7 @@ export const saveDataCronJob = async () => {
       );
 
       const filmsResponse = await axios.post(
-        "http://localhost:3001/api/films/save"
+        "https://digi-challenge.onrender.com/api/films/save"
       );
       const { createdFilms, repeatedFilms } = filmsResponse.data;
       console.log(

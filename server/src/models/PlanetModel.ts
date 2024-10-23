@@ -10,13 +10,13 @@ export interface IPlanet extends Document {
   gravity: string;
   terrain: string;
   surface_water: string;
-  population: string;
+  population: number;
   residents: string[];
   films: string[];
 }
 
 const planetSchema = new Schema<IPlanet>({
-  apiId: { type: Number, required: true }, 
+  apiId: { type: Number, required: true },
   name: { type: String, required: true },
   rotation_period: { type: String, required: true },
   orbital_period: { type: String, required: true },
@@ -25,7 +25,7 @@ const planetSchema = new Schema<IPlanet>({
   gravity: { type: String, required: true },
   terrain: { type: String, required: true },
   surface_water: { type: String, required: true },
-  population: { type: String, required: true },
+  population: { type: Number },
   residents: [{ type: String }],
   films: [{ type: String }],
 });

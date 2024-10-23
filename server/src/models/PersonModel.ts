@@ -3,7 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 export interface IPerson extends Document {
   apiId: number;
   name: string;
-  height: string;
+  height: number;
   mass: string;
   hair_color: string;
   skin_color: string;
@@ -23,7 +23,7 @@ export interface IPerson extends Document {
 const PersonSchema: Schema = new Schema({
   apiId: { type: Number, required: true },
   name: { type: String, required: true },
-  height: { type: String },
+  height: { type: Number },
   mass: { type: String },
   hair_color: { type: String },
   skin_color: { type: String },

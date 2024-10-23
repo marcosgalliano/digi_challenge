@@ -8,7 +8,6 @@ export const fetchPeople = async (): Promise<Person[]> => {
 
   while (nextUrl) {
     const response: AxiosResponse<PeopleApiResponse> = await axios.get(nextUrl);
-    console.log(response);
 
     allPeople = [...allPeople, ...response.data.results];
 

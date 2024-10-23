@@ -5,7 +5,7 @@ export interface IStarship extends Document {
   name: string;
   starshipModel: string;
   manufacturer: string;
-  cost_in_credits: string;
+  cost_in_credits: number;
   length: string;
   max_atmosphering_speed: string;
   crew: string;
@@ -24,7 +24,7 @@ const starshipSchema = new Schema<IStarship>({
   name: { type: String, required: true },
   starshipModel: { type: String, required: true },
   manufacturer: { type: String, required: true },
-  cost_in_credits: { type: String, required: true },
+  cost_in_credits: { type: Number },
   length: { type: String, required: true },
   max_atmosphering_speed: { type: String, required: true },
   crew: { type: String, required: true },

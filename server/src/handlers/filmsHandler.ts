@@ -8,7 +8,7 @@ export const getFilmsHandler = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { title, director } = req.query;
+    const { title, release_date } = req.query;
 
     const query: FilmQuery = {};
 
@@ -16,8 +16,33 @@ export const getFilmsHandler = async (
       query.title = { $regex: new RegExp(title as string, "i") };
     }
 
-    if (director) {
-      query.director = { $regex: new RegExp(director as string, "i") };
+    if (release_date) {
+      const operator = (release_date as string).charAt(0);
+      const yearValue = (release_date as string).slice(1);
+
+      const parsedYear = parseInt(yearValue, 10);
+
+      if (!isNaN(parsedYear)) {
+        const startDate = new Date(`${parsedYear}-01-01T00:00:00.000Z`);
+        const endDate = new Date(`${parsedYear}-12-31T23:59:59.999Z`);
+
+        switch (operator) {
+          case "<":
+            query.release_date = { $lt: startDate };
+            break;
+          case ">":
+            query.release_date = { $gt: endDate };
+            break;
+          case "<=":
+            query.release_date = { $lte: endDate };
+            break;
+          case ">=":
+            query.release_date = { $gte: startDate };
+            break;
+          default:
+            break;
+        }
+      }
     }
 
     const films = await FilmModel.find(query);
@@ -71,5 +96,25 @@ export const saveFilmsHandler = async (
     res.status(500).json({
       error: "Error al guardar los films en la base de datos.",
     });
+  }
+};
+
+export const getFilmByIdHandler = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const film = await FilmModel.findById(id);
+
+    if (!film) {
+      res.status(404).json({ message: "Film not found" });
+      return;
+    }
+
+    res.status(200).json(film);
+  } catch (error) {
+    console.error("Error fetching film:", error);
+    res.status(500).json({ message: "Error fetching film" });
   }
 };

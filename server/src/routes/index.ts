@@ -1,25 +1,45 @@
 import { Router } from "express";
-import { getFilmsHandler, saveFilmsHandler } from "../handlers/filmsHandler";
-import {getStarshipsHandler, saveStarshipsHandler} from "../handlers/starshipsHandler";
-import {getPlanetsHandler, savePlanetsHandler} from "../handlers/planetsHandler";
-import { savePeopleHandler, getPeopleHandler } from "../handlers/peopleHandler";
+import {
+  getFilmsHandler,
+  getFilmByIdHandler,
+  saveFilmsHandler,
+} from "../handlers/filmsHandler";
+import {
+  getStarshipsHandler,
+  getStarshipByIdHandler,
+  saveStarshipsHandler,
+} from "../handlers/starshipsHandler";
+import {
+  getPlanetsHandler,
+  getPlanetByIdHandler,
+  savePlanetsHandler,
+} from "../handlers/planetsHandler";
+import {
+  getPeopleHandler,
+  getPersonByIdHandler,
+  savePeopleHandler,
+} from "../handlers/peopleHandler";
 
 const router = Router();
 
-//people routes
+// People routes
 router.get("/people", getPeopleHandler);
+router.get("/people/:id", getPersonByIdHandler);
 router.post("/people/save", savePeopleHandler);
 
-//films routes
+// Films routes
 router.get("/films", getFilmsHandler);
+router.get("/films/:id", getFilmByIdHandler);
 router.post("/films/save", saveFilmsHandler);
 
-//starships routes
+// Starships routes
 router.get("/starships", getStarshipsHandler);
+router.get("/starships/:id", getStarshipByIdHandler);
 router.post("/starships/save", saveStarshipsHandler);
 
-//planets routes
+// Planets routes
 router.get("/planets", getPlanetsHandler);
+router.get("/planets/:id", getPlanetByIdHandler);
 router.post("/planets/save", savePlanetsHandler);
 
 export default router;
