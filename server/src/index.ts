@@ -9,7 +9,7 @@ const app = express();
 connectDB();
 saveDataCronJob();
 
-app.use(cors({ origin: "https://digi-challenge.vercel.app/" })); //http://localhost:3000
+app.use(cors({ origin: "https://digi-challenge.vercel.app" })); //http://localhost:3000
 
 app.use(morgan("dev"));
 app.use(express.json());
